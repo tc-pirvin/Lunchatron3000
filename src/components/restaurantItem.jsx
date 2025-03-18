@@ -1,10 +1,24 @@
 import { React, useState, useEffect } from 'react';
 
 function RestaurantItem(props) {
-  // console.log(props.restaurant.name);
+  useEffect(() => {
+    console.log("BRUH");
+  }, [props.selectedItems]);
+
+  const itemStyle = {
+    fontWeight: props.selectedItems.includes(props.restaurant) ? 'bold' : '',
+    height: 70,
+    width: 120,
+    padding: 12,
+    border: '1px solid #ccc',
+    borderRadius: 4,
+    margin: 12,
+    display: 'inline-block'
+  }
+
   return (
-    <div onClick={props.onClick}>
-      <p>{props.restaurant.name}</p>
+    <div style={itemStyle} onClick={props.onClick}>
+      <p style={{}}>{props.restaurant.name}</p>
     </div>
   );
 }
