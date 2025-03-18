@@ -10,7 +10,18 @@ function App() {
 
   const [selectedRestaurants, setSelectedRestaurants] = useState([]);
 
+  const columnSectionStyle = {
+    width: '40vw',
+    height: '100vh',
+    display: 'inline-block',
+  }
+
   const handleClick = (rest) => {
+    if (selectedRestaurants.length === 3 && !selectedRestaurants.includes(rest)) {
+      alert("Hey stop. 3 votes max >:(");
+      return;
+    }
+
     setSelectedRestaurants((prevSelectedRestaurants) => {
       let selectedRestaurantsCopy;
   
@@ -27,15 +38,15 @@ function App() {
   return (
     <div className="App">
       <section className="App-header">
-        <div style={{ textAlign: 'left', width: '100%', padding: 12, alignSelf: 'center' }}>
+        <div style={{ textAlign: 'left', width: '100%', padding: 12 }}>
           <h1>
             Lunchatron 3000 <span style={{ fontSize: 16 }}>by: <a style={{ color: '#fff', textDecorationLine: 'none'}} href="twitch.tv/kattzz">kattzz</a></span>
           </h1>
         </div>
       </section>
-      <section style={{ justifyItems: 'center' }}>
-        <div>
-          <h2>Restaurants:</h2>
+      <section>
+        <div style={columnSectionStyle}>
+          <h2>Restaurants</h2>
           { list.restaurants.map((rest, index) => {
             return(
               <RestaurantItem
@@ -43,15 +54,8 @@ function App() {
                 onClick={() => handleClick(rest)}
                 restaurant={rest}
                 selectedItems={selectedRestaurants}
+                disableItem={selectedRestaurants.length === 3 && !selectedRestaurants.includes(rest)}
               />
-            );
-          })}
-        </div>
-        <div>
-          <h2>Your picks:</h2>
-          { selectedRestaurants.map((rest, index) => {
-            return(
-              <p style={{ fontWeight: 'bold', }}>{ rest.name }</p>
             );
           })}
         </div>
