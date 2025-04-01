@@ -1,6 +1,5 @@
 import logo from './logo.svg';
 import './App.css';
-import list from './database/restaurants.json';
 import RestaurantItem from './components/restaurantItem';
 import { useState, useEffect } from 'react';
 
@@ -8,7 +7,20 @@ function App() {
   const [loading, setLoading] = useState(true);
   const [hasError, setHasError] = useState(false);
 
+  const [availableRestaurants, setAvailableRestaurants] = useState([]);
   const [selectedRestaurants, setSelectedRestaurants] = useState([]);
+
+  useEffect(() => {
+    async function fetchAvailableRestaurants() {
+      fetch('http://10.16.118.201:3001/')
+        .then((response) => response.json())
+        .then((restaurants) => {
+          setAvailableRestaurants(restaurants);
+        });
+    }
+
+    fetchAvailableRestaurants();
+  }, []);
 
   const columnSectionStyle = {
     width: '40vw',
@@ -47,7 +59,7 @@ function App() {
       <section>
         <div style={columnSectionStyle}>
           <h2>Restaurants</h2>
-          { list.restaurants.map((rest, index) => {
+          { availableRestaurants.map((rest, index) => {
             return(
               <RestaurantItem
                 key={index}

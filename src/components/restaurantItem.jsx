@@ -1,12 +1,17 @@
 import { React, useState, useEffect } from 'react';
 
 function RestaurantItem(props) {
+  const isSelected = props.selectedItems.includes(props.restaurant);
+
   const itemStyle = {
-    fontWeight: props.selectedItems.includes(props.restaurant) ? 'bold' : '',
+    fontWeight: isSelected ? 'bold' : '',
+    backgroundColor: isSelected ? '#ffcc5f' : '',
+    color: '#24191f',
     height: 70,
     width: 120,
     padding: 12,
-    border: '1px solid #ccc',
+    border: '2px solid #ccc',
+    borderColor: isSelected ? '#24191f' : '#ccc',
     borderRadius: 4,
     margin: 12,
     display: 'inline-block',
