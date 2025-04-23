@@ -3,6 +3,7 @@ import './App.css';
 import RestaurantItem from './components/restaurantItem';
 import { useState, useEffect } from 'react';
 import { jsx } from 'react/jsx-runtime';
+import tacos from './assets/tacos.jpg';
 
 function App() {
   let socket = new WebSocket('ws://10.16.118.201:3001/');
@@ -115,7 +116,7 @@ function App() {
   return (
     <div className="App">
       <section className="App-header">
-        <div style={{ textAlign: 'left', width: '100%', padding: 12 }}>
+        <div style={{ textAlign: 'left', width: '100%', padding: 12, background: `url(${tacos})` }}>
           <h1>
             Lunchatron 3000 <span style={{ fontSize: 16 }}>by: <a style={{ color: '#fff', textDecorationLine: 'none'}} href="twitch.tv/kattzz">kattzz</a></span>
           </h1>
