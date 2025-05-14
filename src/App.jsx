@@ -12,6 +12,8 @@ function App() {
   const [hasError, setHasError] = useState(false);
   const [showVotingTimer, setShowVotingTimer] = useState(false);
 
+  const [timerLengthMinutes, setTimerLengthMinutes] = useState(60);
+
   const [availableRestaurants, setAvailableRestaurants] = useState([]);
   const [selectedRestaurants, setSelectedRestaurants] = useState([]);
 
@@ -86,8 +88,23 @@ function App() {
 
   const timerLabelStyle = { 
     fontWeight: 'bold', 
-    fontSize: 32, 
-    color: 'green',
+    fontSize: 24,
+  }
+
+  const inputStyle = { 
+    display: 'flex',
+    border: '1px solid #9d9d9d',
+    padding: 12,
+    borderRadius: 4,
+    width: 40,
+    textAlign: 'center',
+    marginRight: 24,
+    marginLeft: 24,
+  }
+
+  const handleTimerLengthChange = (event) => {
+    console.log(event.target.value);
+    setTimerLengthMinutes(event.target.value);
   }
 
   const handleRestaurantClick = (rest) => {
@@ -125,8 +142,10 @@ function App() {
       <div style={{ display: 'flex', justifyContent: 'center' }}>
         <section>
           <div style={adminSectionStyle}>
+            <label for='timerLength' style={timerLabelStyle}>Timer Length (mins):</label>
+            <input id='timerLength' onChange={handleTimerLengthChange} style={inputStyle} placeholder='Length' value={timerLengthMinutes}/>
             <button onClick={handleSubmitClick} style={startTimerButtonStyle}>
-              Start Timer
+              Start
             </button>
           </div>
         </section>
