@@ -65,8 +65,8 @@ function App() {
   }
 
   const startTimerButtonStyle = {
-    height: 72,
-    width: 240,
+    height: 64,
+    width: 200,
     backgroundColor: '#ff6060',
     color: '#fff',
     fontWeight: 'bold',
@@ -86,7 +86,7 @@ function App() {
     fontSize: 20,
   }
 
-  const timerLabelStyle = { 
+  const largeLabelStyle = { 
     fontWeight: 'bold', 
     fontSize: 24,
   }
@@ -100,6 +100,7 @@ function App() {
     textAlign: 'center',
     marginRight: 24,
     marginLeft: 24,
+    fontSize: 16,
   }
 
   const handleTimerLengthChange = (event) => {
@@ -127,7 +128,18 @@ function App() {
   }
 
   const handleSubmitClick = async () => {
-    alert("Submit: " + selectedRestaurants + '?');
+    socket.send(JSON.stringify(selectedRestaurants));
+    // const response = await fetch("http://10.16.118.201:3001/api/submit", {
+    //   method: "POST",
+    //   headers: {
+    //     "Content-Type": "application/json"
+    //   },
+    //   body: JSON.stringify(selectedRestaurants),
+    // });    // fetch('http://10.16.118.201:3001/')
+    //   .then((response) => response.json())
+    //   .then(() => {
+    //     console.log("messaged server ig");
+    //   });
   }
 
   return (
@@ -135,14 +147,14 @@ function App() {
       <section className="App-header">
         <div style={{ textAlign: 'left', width: '100%', padding: 12, background: `url(${tacos})` }}>
           <h1>
-            Lunchatron 3000 <span style={{ fontSize: 16 }}>by: <a style={{ color: '#fff', textDecorationLine: 'none'}} href="twitch.tv/kattzz">kattzz</a></span>
+            Lunchatron 3000 <span style={{ fontSize: 16 }}>by: <a style={{ color: '#fff', textDecorationLine: 'none'}} href="twitch.tv/kattzz">Pierce</a></span>
           </h1>
         </div>
       </section>
       <div style={{ display: 'flex', justifyContent: 'center' }}>
         <section>
           <div style={adminSectionStyle}>
-            <label for='timerLength' style={timerLabelStyle}>Timer Length (mins):</label>
+            <label for='timerLength' style={largeLabelStyle}>Timer Length (mins):</label>
             <input id='timerLength' onChange={handleTimerLengthChange} style={inputStyle} placeholder='Length' value={timerLengthMinutes}/>
             <button onClick={handleSubmitClick} style={startTimerButtonStyle}>
               Start
@@ -152,7 +164,7 @@ function App() {
         <section>
           <div style={choicesSectionStyle}>
             <div style={headerstyle}>
-              <span style={{ fontWeight: 'bold', fontSize: 32 }}>Restaurants</span>
+              <span style={largeLabelStyle}>Options <span style={{ fontWeight: 'normal', fontSize: 16 }}>(pick 3)</span></span>
               <button onClick={handleSubmitClick} style={submitButtonStyle}>
                 Submit
               </button>
@@ -170,7 +182,7 @@ function App() {
             })}
           </div>
           { showVotingTimer &&
-            <span style={timerLabelStyle}>Voting is LIVE</span>
+            <span style={largeLabelStyle}>Voting is LIVE</span>
           }
         </section>
       </div>
