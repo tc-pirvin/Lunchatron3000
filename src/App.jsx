@@ -128,18 +128,14 @@ function App() {
   }
 
   const handleSubmitClick = async () => {
-    socket.send(JSON.stringify(selectedRestaurants));
-    // const response = await fetch("http://10.16.118.201:3001/api/submit", {
-    //   method: "POST",
-    //   headers: {
-    //     "Content-Type": "application/json"
-    //   },
-    //   body: JSON.stringify(selectedRestaurants),
-    // });    // fetch('http://10.16.118.201:3001/')
-    //   .then((response) => response.json())
-    //   .then(() => {
-    //     console.log("messaged server ig");
-    //   });
+    // socket.send(JSON.stringify(selectedRestaurants));
+    const response = await fetch("http://10.16.118.201:3001/api/submit", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(selectedRestaurants),
+    });
   }
 
   return (
